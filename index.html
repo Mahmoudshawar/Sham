@@ -3,90 +3,281 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Private Access</title>
+  <title>Sham ❤️</title>
   <style>
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:linear-gradient(135deg,#120014,#3a0a3a,#ff4fa3);
-      font-family:Arial,sans-serif;
-      color:#fff;
-      text-align:center;
-      padding:20px;
-      box-sizing:border-box;
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #120014, #3a0a3a, #ff4fa3);
+      color: white;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      position: relative;
     }
-    .box{
-      width:100%;
-      max-width:360px;
-      background:rgba(255,255,255,0.12);
-      padding:24px;
-      border-radius:20px;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-      backdrop-filter:blur(8px);
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.9) 1px, transparent 2px),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.7) 1px, transparent 2px),
+        radial-gradient(circle at 60% 70%, rgba(255,255,255,0.8) 1px, transparent 2px),
+        radial-gradient(circle at 30% 80%, rgba(255,255,255,0.6) 1px, transparent 2px),
+        radial-gradient(circle at 70% 50%, rgba(255,255,255,0.8) 1px, transparent 2px);
+      background-size: 300px 300px;
+      opacity: 0.35;
+      animation: drift 18s linear infinite;
+      z-index: 0;
+      pointer-events: none;
     }
-    input{
-      width:100%;
-      padding:14px;
-      font-size:16px;
-      border:none;
-      border-radius:12px;
-      margin-top:12px;
-      box-sizing:border-box;
-      text-align:center;
+
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-40px); }
     }
-    button{
-      width:100%;
-      padding:14px;
-      margin-top:12px;
-      border:none;
-      border-radius:12px;
-      font-size:16px;
-      font-weight:bold;
-      background:#fff;
-      color:#d1006f;
-      cursor:pointer;
+
+    .box {
+      width: 100%;
+      max-width: 390px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      z-index: 2;
+      position: relative;
     }
-    .hidden{display:none;}
-    .heart{
-      font-size:42px;
-      animation:pulse 1s infinite;
-      margin-top:14px;
+
+    h1, h2, p { margin: 10px 0; }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      margin-top: 10px;
+      text-align: center;
+      outline: none;
     }
-    @keyframes pulse{
-      0%{transform:scale(1);}
-      50%{transform:scale(1.15);}
-      100%{transform:scale(1);}
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: white;
+      color: #d1006f;
+    }
+
+    .hidden { display: none; }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #ff5ca8;
+      animation: floatUp 5s linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    .big-heart {
+      font-size: 46px;
+      animation: pulse 1s infinite;
+      margin-top: 10px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+
+    .countdown {
+      font-size: 48px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .typing-name {
+      font-size: 32px;
+      font-weight: bold;
+      min-height: 44px;
+    }
+
+    .small {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .glow {
+      text-shadow: 0 0 8px rgba(255,255,255,0.7);
     }
   </style>
 </head>
 <body>
+  <div class="stars"></div>
+
   <div class="box" id="loginBox">
-    <h2>🔐 Private File</h2>
+    <h2>🔐 Private Access</h2>
     <p>Only Sham can unlock this ❤️</p>
-    <input id="pass" type="text" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter password">
+    <input id="pass" type="text" placeholder="Enter password" autocomplete="off" autocapitalize="none" spellcheck="false">
     <button onclick="checkPass()">Unlock</button>
+    <p class="small">Hint: your beautiful name 😏</p>
+  </div>
+
+  <div class="box hidden" id="countdownBox">
+    <h2>Decrypting secret message...</h2>
+    <div class="countdown glow" id="countdown">3</div>
   </div>
 
   <div class="box hidden" id="loveBox">
-    <h2>Sham ❤️</h2>
+    <div class="typing-name glow" id="typingName"></div>
     <p>I didn’t hack anything...</p>
     <p>my heart just chose you 💖</p>
+    <p>Out of all the people in this world...</p>
+    <p><b>it chose you, every single time ❤️</b></p>
     <p><b>I LOVE YOU SO MUCH</b></p>
-    <div class="heart">❤️</div>
+    <p>You are my favorite person 🌍</p>
+    <div class="big-heart">❤️</div>
+    <button onclick="showExtra()">Click for one more secret 👀</button>
   </div>
 
+  <div class="box hidden" id="extraBox">
+    <h2>One more thing, Sham... 💌</h2>
+    <p>You are my favorite smile,</p>
+    <p>my favorite feeling,</p>
+    <p>and my favorite person in this life ❤️</p>
+    <p><b>Sham ❤️ Mahmoud</b></p>
+    <div class="big-heart">💖</div>
+    <button onclick="askLove()">One last question 😏</button>
+  </div>
+
+  <div class="box hidden" id="questionBox">
+    <h2>Do you love Mahmoud? 👀</h2>
+    <button onclick="finalYes()">Yes ❤️</button>
+    <button onclick="moveNo(this)" id="noBtn">No 😅</button>
+  </div>
+
+  <div class="box hidden" id="finalBox">
+    <h2 class="glow">YAAAAY ❤️</h2>
+    <p>Best answer ever 💖</p>
+    <p>I love you, Sham.</p>
+    <div class="big-heart">❤️❤️❤️</div>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="https://samplelib.com/lib/preview/mp3/sample-3s.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    function checkPass(){
-      const value = document.getElementById('pass').value.trim().toLowerCase();
-      if(value === 'sham'){
-        document.getElementById('loginBox').classList.add('hidden');
-        document.getElementById('loveBox').classList.remove('hidden');
+    function checkPass() {
+      const value = document.getElementById("pass").value.trim().toLowerCase();
+
+      if (value === "sham") {
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("countdownBox").classList.remove("hidden");
+
+        let num = 3;
+        const countdownEl = document.getElementById("countdown");
+        countdownEl.textContent = num;
+
+        const timer = setInterval(() => {
+          num--;
+          if (num > 0) {
+            countdownEl.textContent = num;
+          } else {
+            clearInterval(timer);
+            document.getElementById("countdownBox").classList.add("hidden");
+            document.getElementById("loveBox").classList.remove("hidden");
+            typeName();
+            startHearts();
+            document.getElementById("bgMusic").play().catch(() => {});
+          }
+        }, 1000);
+
       } else {
-        alert('Wrong password 😏');
+        alert("Wrong password 😏");
       }
+    }
+
+    function typeName() {
+      const text = "Sham ❤️";
+      const el = document.getElementById("typingName");
+      el.textContent = "";
+      let i = 0;
+
+      function type() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 150);
+        }
+      }
+
+      type();
+    }
+
+    let heartInterval;
+
+    function startHearts() {
+      if (heartInterval) return;
+
+      heartInterval = setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 25 + 20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 250);
+    }
+
+    function showExtra() {
+      document.getElementById("loveBox").classList.add("hidden");
+      document.getElementById("extraBox").classList.remove("hidden");
+    }
+
+    function askLove() {
+      document.getElementById("extraBox").classList.add("hidden");
+      document.getElementById("questionBox").classList.remove("hidden");
+    }
+
+    function finalYes() {
+      document.getElementById("questionBox").classList.add("hidden");
+      document.getElementById("finalBox").classList.remove("hidden");
+    }
+
+    function moveNo(btn) {
+      btn.style.position = "absolute";
+      btn.style.left = Math.random() * 60 + "%";
+      btn.style.top = Math.random() * 70 + "%";
     }
   </script>
 </body>
