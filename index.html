@@ -1,110 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Private Access</title>
-
-<style>
-body {
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:black;
-  color:white;
-  font-family:Arial;
-  text-align:center;
-  overflow:hidden;
-}
-
-.box {
-  background:rgba(255,255,255,0.08);
-  padding:30px;
-  border-radius:20px;
-  backdrop-filter: blur(10px);
-}
-
-input {
-  padding:10px;
-  border:none;
-  border-radius:10px;
-  margin-top:10px;
-  text-align:center;
-}
-
-button {
-  margin-top:10px;
-  padding:10px 20px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  background:#ff4da6;
-  color:white;
-  font-weight:bold;
-}
-
-.hidden {
-  display:none;
-}
-
-.heart {
-  position:absolute;
-  color:#ff4da6;
-  animation: float 5s linear infinite;
-}
-
-@keyframes float {
-  0% {transform:translateY(100vh);}
-  100% {transform:translateY(-10vh);}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Private Access</title>
+  <style>
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#120014,#3a0a3a,#ff4fa3);
+      font-family:Arial,sans-serif;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+      box-sizing:border-box;
+    }
+    .box{
+      width:100%;
+      max-width:360px;
+      background:rgba(255,255,255,0.12);
+      padding:24px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      backdrop-filter:blur(8px);
+    }
+    input{
+      width:100%;
+      padding:14px;
+      font-size:16px;
+      border:none;
+      border-radius:12px;
+      margin-top:12px;
+      box-sizing:border-box;
+      text-align:center;
+    }
+    button{
+      width:100%;
+      padding:14px;
+      margin-top:12px;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+      font-weight:bold;
+      background:#fff;
+      color:#d1006f;
+      cursor:pointer;
+    }
+    .hidden{display:none;}
+    .heart{
+      font-size:42px;
+      animation:pulse 1s infinite;
+      margin-top:14px;
+    }
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.15);}
+      100%{transform:scale(1);}
+    }
+  </style>
 </head>
-
 <body>
+  <div class="box" id="loginBox">
+    <h2>🔐 Private File</h2>
+    <p>Only Sham can unlock this ❤️</p>
+    <input id="pass" type="text" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter password">
+    <button onclick="checkPass()">Unlock</button>
+  </div>
 
-<div class="box" id="login">
-  <h2>🔐 Private File</h2>
-  <p>Only Sham can unlock this</p>
-  <input type="password" id="pass" placeholder="Enter password">
-  <br>
-  <button onclick="check()">Unlock</button>
-</div>
+  <div class="box hidden" id="loveBox">
+    <h2>Sham ❤️</h2>
+    <p>I didn’t hack anything...</p>
+    <p>my heart just chose you 💖</p>
+    <p><b>I LOVE YOU SO MUCH</b></p>
+    <div class="heart">❤️</div>
+  </div>
 
-<div class="box hidden" id="love">
-  <h2>Sham ❤️</h2>
-  <p>I didn’t hack anything…</p>
-  <p>my heart just chose you 💖</p>
-  <p>I LOVE YOU SO MUCH</p>
-  <p>You are my everything 🌍</p>
-</div>
-
-<script>
-function check() {
-  let p = document.getElementById("pass").value.toLowerCase();
-  if (p === "sham" || p === "mahmoud") {
-
-    document.getElementById("login").classList.add("hidden");
-    document.getElementById("love").classList.remove("hidden");
-
-    // hearts animation
-    setInterval(() => {
-      let heart = document.createElement("div");
-      heart.innerHTML = "❤️";
-      heart.className = "heart";
-      heart.style.left = Math.random()*100 + "vw";
-      heart.style.fontSize = (Math.random()*20+20)+"px";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 5000);
-    }, 300);
-
-  } else {
-    alert("❌ Wrong password… only Sham can open it");
-  }
-}
-</script>
-
+  <script>
+    function checkPass(){
+      const value = document.getElementById('pass').value.trim().toLowerCase();
+      if(value === 'sham'){
+        document.getElementById('loginBox').classList.add('hidden');
+        document.getElementById('loveBox').classList.remove('hidden');
+      } else {
+        alert('Wrong password 😏');
+      }
+    }
+  </script>
 </body>
 </html>
